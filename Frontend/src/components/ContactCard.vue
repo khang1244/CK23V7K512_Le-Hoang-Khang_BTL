@@ -24,6 +24,9 @@ export default {
             {{ contact.phone }}
         </div>
         <div class="p-1">
+             <strong>Giới tính:</strong> {{ contact.gender }}
+        </div>
+        <div class="p-1">
             <strong>Ngày làm việc trong tuần:</strong>
             <table class="table table-bordered table-sm mt-2" style="width: auto;">
                 <thead class="thead-light">

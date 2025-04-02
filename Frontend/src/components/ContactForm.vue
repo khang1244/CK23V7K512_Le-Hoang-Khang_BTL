@@ -21,6 +21,13 @@
             <ErrorMessage name="phone" class="error-feedback"/>
         </div>
         <div class="form-group">
+            <label for="gender">Giới tính</label>
+            <select name="gender" class="form-control" v-model="contactLocal.gender">
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label><strong>Ngày làm việc trong tuần:</strong></label>
             <div class="work-schedule-grid">
                 <div v-for="(schedule, index) in contactLocal.workSchedule" :key="index" class="schedule-item">
@@ -109,6 +116,7 @@ export default {
                 address: "",
                 phone: "",
                 image: "",
+                gender:"",
                 favorite: false,
                 workSchedule: [
                     { day: "Thứ 2", timework: "" },

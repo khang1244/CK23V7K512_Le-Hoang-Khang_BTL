@@ -14,6 +14,7 @@ class ContactService {
       workSchedule: payload.workSchedule,
       image: payload.image,
       gender: payload.gender,
+      birthday: payload.birthday,
       favorite: payload.favorite,
     };
 

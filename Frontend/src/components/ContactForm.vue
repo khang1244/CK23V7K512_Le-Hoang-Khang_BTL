@@ -34,6 +34,23 @@
                 </div>
             </div>
         </div>
+        <div class="form-group">
+            <div>
+                <label>Hình ảnh:</label>
+                <input type="file" @change="onFileChange" />
+            </div>
+            <!-- Ảnh mô phỏng -->
+            <div v-if="imagePreview">
+                <label>Ảnh mô phỏng:</label>
+                <img :src="imagePreview" alt="Ảnh mô phỏng" height="120px">
+            </div>
+
+            <!-- Ảnh hiện tại từ DB (sau khi upload thành công) -->
+            <div v-if="contactLocal.image">
+                <label>Ảnh hiện tại:</label>
+                <img :src="contactLocal.image" alt="Ảnh hiện tại" height="120px">
+            </div>
+        </div>
 
         <div class="form-group form-check">
             <input name="favorite" type="checkbox" class="form-check-input" v-model="contactLocal.favorite" />
@@ -53,6 +70,7 @@
 
 <script>
 import * as yup from "yup";
+import axios from 'axios';
 import { Form, Field, ErrorMessage } from "vee-validate";
 
 export default {
@@ -90,6 +108,7 @@ export default {
                 email: "",
                 address: "",
                 phone: "",
+                image: "",
                 favorite: false,
                 workSchedule: [
                     { day: "Thứ 2", timework: "" },
@@ -101,10 +120,31 @@ export default {
                  ]
             },
             contactFormSchema,
+            imagePreview: null, 
         };
     },
     methods: {
-        submitContact() {
+        async submitContact() {
+             // Upload ảnh trước khi gửi form
+            if (this.selectedFile) {
+                const formData = new FormData();
+                formData.append('image', this.selectedFile);
+                
+                try {
+                    const response = await axios.post('http://localhost:3000/upload', formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    });
+
+                    this.contactLocal.image = response.data.file.url;
+                } catch (error) {
+                    console.log(error);
+                    
+                    alert('Failed to upload image');
+                    return; // Nếu upload ảnh không thành công thì không tiếp tục submit form
+                }
+            }
             this.$emit("submit:contact", this.contactLocal);
         },
         deleteContact() {
@@ -116,6 +156,13 @@ export default {
                 return false;
             }
             else this.$router.push({ name: "contactbook" });
+        },
+        onFileChange(event) {
+            this.selectedFile = event.target.files[0];
+            if (this.selectedFile) {
+                // Tạo URL tạm thời cho ảnh và gán vào imagePreview
+                this.imagePreview = URL.createObjectURL(this.selectedFile);
+            }
         }
     },
 };

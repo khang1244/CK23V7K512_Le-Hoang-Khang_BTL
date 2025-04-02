@@ -25,11 +25,19 @@
         </div>
         <div class="mt-3 col-md-6">
             <div v-if="activeContact">
+                 <div class="d-flex">
+                    <div class="detail-contact mr-3">
                 <h4>
                     Chi tiết liên hệ
                     <i class="fas fa-address-card"></i>
                 </h4>
                 <ContactCard :contact="activeContact" />
+                </div>
+                    <div>
+                        <h6>Hình ảnh</h6>
+                        <img :src="activeContact.image" height="220px">
+                    </div>
+                </div>
                  <router-link :to="{
                     name: 'contact.edit',
                     params: { id: activeContact._id },
@@ -129,6 +137,9 @@ export default {
 .page {
     text-align: left;
     max-width: 750px;
+}
+.detail-contact {
+    min-width: 370px;
 }
 </style>
 

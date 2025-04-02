@@ -20,6 +20,20 @@
             <Field name="phone" type="tel" class="form-control" v-model="contactLocal.phone"></Field>
             <ErrorMessage name="phone" class="error-feedback"/>
         </div>
+        <div class="form-group">
+            <label><strong>Ngày làm việc trong tuần:</strong></label>
+            <div class="work-schedule-grid">
+                <div v-for="(schedule, index) in contactLocal.workSchedule" :key="index" class="schedule-item">
+                <label>{{ schedule.day }}</label>
+                <select v-model="schedule.timework" class="form-control">
+                    <option value="">-- Không có ca làm việc --</option>
+                    <option value="Ca sáng (7h30 - 11h30)">Ca sáng (7h30 - 11h30)</option>
+                    <option value="Ca chiều (13h30 - 17h30)">Ca chiều (13h30 - 17h30)</option>
+                    <option value="Cả ngày (7h30 - 22h)">Cả ngày (7h30 - 17h30)</option>
+                </select>
+                </div>
+            </div>
+        </div>
 
         <div class="form-group form-check">
             <input name="favorite" type="checkbox" class="form-check-input" v-model="contactLocal.favorite" />
@@ -77,6 +91,14 @@ export default {
                 address: "",
                 phone: "",
                 favorite: false,
+                workSchedule: [
+                    { day: "Thứ 2", timework: "" },
+                    { day: "Thứ 3", timework: "" },
+                    { day: "Thứ 4", timework: "" },
+                    { day: "Thứ 5", timework: "" },
+                    { day: "Thứ 6", timework: "" },
+                    { day: "Thứ 7", timework: "" }
+                 ]
             },
             contactFormSchema,
         };

@@ -41,7 +41,7 @@
                     <option value="">-- Không có ca làm việc --</option>
                     <option value="Ca sáng (7h30 - 11h30)">Ca sáng (7h30 - 11h30)</option>
                     <option value="Ca chiều (13h30 - 17h30)">Ca chiều (13h30 - 17h30)</option>
-                    <option value="Cả ngày (7h30 - 22h)">Cả ngày (7h30 - 17h30)</option>
+                    <option value="Cả ngày (7h30 - 22h)">Cả ngày (7h30 - 22h)</option>
                 </select>
                 </div>
             </div>

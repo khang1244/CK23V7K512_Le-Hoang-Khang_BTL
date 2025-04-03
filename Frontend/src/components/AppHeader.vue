@@ -1,20 +1,20 @@
 <template>
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <a href="/" class="navbar-brand">Ứng dụng Quản lý danh bạ</a>
-        <div class="mr-auto navbar-nav">
-            <li class="nav-item">
-                <router-link :to="{ name: 'contactbook' }" class="nav-link">
-                    Danh bạ
-                    <i class="fas fa-address-book"></i>
-                </router-link>
-            </li>
-            <li class="nav-item" v-if="username">
-              <router-link to="/thong-ke" class="nav-link">
-                Thống kê danh bạ
+  <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a href="/" class="navbar-brand">Ứng dụng Quản lý danh bạ</a>
+    <div class="mr-auto navbar-nav">
+      <li class="nav-item">
+        <router-link :to="{ name: 'contactbook' }" class="nav-link">
+          Danh bạ
+          <i class="fas fa-address-book"></i>
+        </router-link>
+      </li>
+      <li class="nav-item" v-if="username">
+        <router-link to="/thong-ke" class="nav-link">
+          Thống kê danh bạ
               <i class="fas fa-chart-pie"></i></router-link>
-            </li>
-        </div>
-         <div class="ml-auto navbar-nav">
+      </li>
+    </div>
+    <div class="ml-auto navbar-nav">
       <!-- Dropdown khi đã đăng nhập -->
       <li class="nav-item dropdown" v-if="username">
         <a
@@ -41,9 +41,9 @@
         <router-link to="/register" class="nav-link">Đăng ký</router-link>
       </li>
     </div>
-    </nav>
+  </nav>
 </template>
-<script> 
+<script>
 export default {
   data() {
     return {
@@ -67,6 +67,8 @@ export default {
       localStorage.removeItem("token");
       localStorage.removeItem("username");
       this.username = null;
+      // Thêm thông báo đăng xuất thành công
+      alert("Đăng xuất thành công!");
       this.$router.push("/login");
     },
   },

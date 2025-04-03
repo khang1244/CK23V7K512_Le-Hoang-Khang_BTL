@@ -25,31 +25,42 @@
         </div>
         <div class="mt-3 col-md-6">
             <div v-if="activeContact">
-                 <div class="d-flex">
-                    <div class="detail-contact mr-3">
+              <div id="pdf-export-wrapper">
+                <div
+                id="pdf-content"
+                class="pdf-wrapper d-flex justify-content-center align-items-start" >
+                <div class="detail-contact mr-3">
                 <h4>
                     Chi tiết liên hệ
                     <i class="fas fa-address-card"></i>
                 </h4>
-                <ContactCard :contact="activeContact" />
+                 <ContactCard :contact="activeContact" @export="exportToPDF" />
                 </div>
                     <div>
                         <h6>Hình ảnh</h6>
                         <img :src="activeContact.image" height="220px">
                     </div>
                 </div>
+                </div>
+                <!-- Đặt nút ngang hàng với "Liên hệ yêu thích" -->
+                <div class="d-flex align-items-center justify-content-start ml-3">
                  <router-link :to="{
                     name: 'contact.edit',
                     params: { id: activeContact._id },
                  }">
-                    <span class="mt-2 badge badge-warning">
-                        <i class="fas fa-edit"></i> Hiệu chỉnh</span>
-                </router-link>
+                 <button class="btn btn-warning btn-sm mr-2">
+                     <i class="fas fa-edit"></i> Hiệu chỉnh</button>
+                 </router-link>
+                <button class="btn btn-warning btn-sm" @click="exportToPDF">
+                    📄 Xuất PDF
+                </button>
+                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+import html2pdf from "html2pdf.js";
 import ContactCard from "@/components/ContactCard.vue";
 import InputSearch from "@/components/InputSearch.vue";
 import ContactList from "@/components/ContactList.vue";
@@ -126,6 +137,20 @@ export default {
         goToAddContact() {
             this.$router.push({ name: "contact.add" });
         },
+        exportToPDF() {
+        const element = document.getElementById("pdf-export-wrapper");
+        if (!element) return alert("Không tìm thấy vùng xuất PDF!");
+
+        const opt = {
+            margin: 0,
+            filename: `${this.activeContact.name}_Thông_tin_chi_tiết_liên_hệ.pdf`,
+            image: { type: "jpeg", quality: 1 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: "pt", format: "a4", orientation: "portrait" },
+        };
+
+      html2pdf().set(opt).from(element).save();
+    },
     },
     mounted() {
         this.refreshList();
@@ -134,12 +159,6 @@ export default {
 </script>
 
 <style scoped>
-.page {
-    text-align: left;
-    max-width: 750px;
-}
-.detail-contact {
-    min-width: 370px;
-}
+@import "@/assets/ContactBook.css";
 </style>
 

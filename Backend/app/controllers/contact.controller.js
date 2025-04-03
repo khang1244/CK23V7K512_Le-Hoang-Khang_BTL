@@ -119,3 +119,30 @@ exports.findAllFavorite = async (_req, res, next) => {
     );
   }
 };
+// Lấy thống kê danh bạ
+exports.getContactStats = async (req, res) => {
+  try {
+    const contactService = new ContactService(MongoDB.client);
+    const contacts = await contactService.find({});
+
+    const total = contacts.length;
+    const favoriteCount = contacts.filter((c) => c.favorite === true).length;
+    const nonFavoriteCount = total - favoriteCount; // Calculate non-favorite contacts
+
+    const genderStats = {
+      nam: contacts.filter((c) => c.gender === "Nam").length,
+      nu: contacts.filter((c) => c.gender === "Nữ").length,
+    };
+
+    // Returning all stats including non-favorite count
+    res.json({
+      total,
+      favoriteCount,
+      nonFavoriteCount, // Add non-favorite count here
+      genderStats,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Lỗi server khi lấy thống kê danh bạ" });
+  }
+};

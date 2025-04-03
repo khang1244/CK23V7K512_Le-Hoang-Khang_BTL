@@ -8,6 +8,11 @@
                     <i class="fas fa-address-book"></i>
                 </router-link>
             </li>
+            <li class="nav-item" v-if="username">
+              <router-link to="/thong-ke" class="nav-link">
+                Thống kê danh bạ
+              <i class="fas fa-chart-pie"></i></router-link>
+            </li>
         </div>
          <div class="ml-auto navbar-nav">
       <!-- Dropdown khi đã đăng nhập -->

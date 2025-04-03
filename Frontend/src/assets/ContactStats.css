@@ -1,0 +1,91 @@
+/* Tổng thể giao diện */
+.max-w-6xl {
+  max-width: 100%;
+  margin: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+/* Các phần của thống kê */
+.grid div {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.mt-4 {
+  margin-top: 20px;
+}
+
+/* Biểu đồ */
+.pie-chart {
+  height: 400px; /* Chỉnh lại chiều cao */
+  width: 400px; /* Đảm bảo biểu đồ có chiều rộng */
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  border-radius: 50%; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Bóng đổ cho 3D */
+  transform: perspective(1000px) rotateX(15deg) rotateY(15deg);
+}
+
+canvas {
+  max-width: 100% !important;
+  height: 100% !important;
+}
+
+.gender-info {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Cải thiện phần thẻ thông tin */
+.card {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Nút quay lại trang chủ */
+.btn-return-home {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 20px;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+.btn-return-home:hover {
+  background-color: #0056b3;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5);
+}

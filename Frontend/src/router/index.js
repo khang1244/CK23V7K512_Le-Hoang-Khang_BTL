@@ -21,6 +21,12 @@ const routes = [
     component: Register,
   },
   {
+    path: "/thong-ke",
+    name: "ContactStats",
+    component: () => import("@/views/ContactStats.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
     path: "/:pathMatch(.*)*",
     name: "notfound",
     component: () => import("@/views/NotFound.vue"),
